@@ -1,0 +1,32 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="UTF-8" />
+		<title>Notifications</title>
+		<script type="text/javascript" src="js/notifications.js"></script>
+	</head>
+	<body>
+		<input id="requestPermissionBtn" type="button" value="Ask Permission" />
+		<input id="notifyBtn" type="button" value="Show Notification" />
+		<script type="text/javascript">
+			var requestPermissionBtn = this.document.getElementById('requestPermissionBtn');
+			var notifyBtn = this.document.getElementById('notifyBtn');
+			if (!supportNotifications()) {
+				requestPermissionBtn.setAttribute('style', 'display: none');
+				notifyBtn.setAttribute('style', 'display: none');
+				window.alert('Seu browser não suporta a API de notificações');
+			} else {
+				requestPermissionBtn.addEventListener('click', function() {
+					requestPermission()
+				});
+				notifyBtn.addEventListener('click', function() {
+					notify('test', 'Test')
+				});
+			}
+			if (hasPermission())
+				requestPermissionBtn.setAttribute('style', 'display: none');
+			else
+				notifyBtn.setAttribute('style', 'display: none');
+		</script>
+	</body>
+</html>
